@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _speed = 10;
+    [SerializeField] private float _speed = 10f;
+    [SerializeField] private float _thrust = 2f;
     [SerializeField] private float _offset = 1.05f;
     [SerializeField] private float _fireRate = 0.5f;  
     [SerializeField] private GameObject _laserPrefab;
@@ -60,11 +61,22 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire) {
             FireLaser();
         }
+
+
     }
 
     void CalculateMovement() {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+
+        //if left shift button down
+        //increase speed
+        //else
+        //move at normal speed
+
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * (_speed * 2) * Time.deltaTime);
+        }
 
         transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * _speed * Time.deltaTime);
 
@@ -75,6 +87,8 @@ public class Player : MonoBehaviour
         } else if (transform.position.x < -11.3f) {
             transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
+
+        
     }
 
     void FireLaser() {
