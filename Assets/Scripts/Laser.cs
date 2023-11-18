@@ -15,8 +15,7 @@ public class Laser : MonoBehaviour
         }
         else{
             MoveDown();  
-        }
-        
+        }  
         
     }
 
@@ -51,6 +50,8 @@ public class Laser : MonoBehaviour
             Player player = collision.GetComponent<Player>();
             if (player != null) {
                 player.Damage();
+
+                Destroy(this.gameObject);
             }
         }
     }

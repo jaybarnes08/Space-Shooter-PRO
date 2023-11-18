@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,6 +8,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed = 10f;
     [SerializeField] private float _thrust = 2f;
+
     [SerializeField] private float _offset = 1.05f;
     [SerializeField] private float _fireRate = 0.5f;  
     [SerializeField] private GameObject _laserPrefab;
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _speedBoostActive = false;
     [SerializeField] private bool _shieldsActive = false;
     [SerializeField] private float _speedMultiplier = 2f;
+    [SerializeField] private int _shieldStrength = 3;
 
     [SerializeField] private int _score;
 
@@ -62,20 +65,33 @@ public class Player : MonoBehaviour
             FireLaser();
         }
 
+        if (_shieldsActive) {
+            UpdateShieldVisual();
+        }
 
+    }
+
+    private void UpdateShieldVisual() {
+        switch (_shieldStrength) {
+            case 3:
+                _shieldVisualizer.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+                break;
+            case 2:
+                _shieldVisualizer.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .66f);
+                break;
+            case 1:
+                _shieldVisualizer.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .33f);
+                break;
+
+        }
     }
 
     void CalculateMovement() {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        //if left shift button down
-        //increase speed
-        //else
-        //move at normal speed
-
         if (Input.GetKey(KeyCode.LeftShift)) {
-            transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * (_speed * 2) * Time.deltaTime);
+            transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * (_speed * _thrust) * Time.deltaTime);
         }
 
         transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * _speed * Time.deltaTime);
@@ -111,8 +127,14 @@ public class Player : MonoBehaviour
 
     public void Damage() {
         if (_shieldsActive) {
-            _shieldsActive = false;
-            _shieldVisualizer.SetActive(false);
+
+            _shieldStrength--;
+
+            if (_shieldStrength < 1) {
+                _shieldsActive = false;
+                _shieldVisualizer.SetActive(false);
+            }
+
             return;
         }
 
