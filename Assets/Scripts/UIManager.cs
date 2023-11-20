@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite[] _livesSprites;
     [SerializeField] private TMP_Text _gameOverText;
     [SerializeField] private TMP_Text _restartGameText;
+    [SerializeField] private TMP_Text _ammoCountText;
 
     private GameManager _gameManager;
 
@@ -42,6 +43,10 @@ public class UIManager : MonoBehaviour
             GameOverSequence();
            
         }
+    }
+
+    public void UpdateAmmoCount(int ammo) {
+        _ammoCountText.text = "Current Ammo: " + ammo;
     }
 
     void GameOverSequence() {

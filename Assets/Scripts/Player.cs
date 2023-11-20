@@ -28,6 +28,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int _score;
 
+    [SerializeField] private int _ammoCount = 15;
+    [SerializeField] private int _currentAmmo;
+
 
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
@@ -36,6 +39,8 @@ public class Player : MonoBehaviour
     AudioSource _audioSource;
 
     private void Start() {
+        _currentAmmo = _ammoCount;
+
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _audioSource = GetComponent<AudioSource>(); 
@@ -55,13 +60,14 @@ public class Player : MonoBehaviour
             _audioSource.clip = _laserAudio;
         }
 
+        _uiManager.UpdateAmmoCount(_currentAmmo);
     }
 
     void Update()
     {
         CalculateMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire) {
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire && _currentAmmo > 0) {
             FireLaser();
         }
 
@@ -111,6 +117,8 @@ public class Player : MonoBehaviour
 
         _canFire = Time.time + _fireRate;
 
+        _currentAmmo--;
+        _uiManager.UpdateAmmoCount(_currentAmmo);
 
         if (_tripleShotActive)
         {
@@ -187,6 +195,10 @@ public class Player : MonoBehaviour
 
     public int GetScore() {
         return _score;
+    }
+
+    public int GetCurrentAmmo() {
+        return _currentAmmo;
     }
 
 }
