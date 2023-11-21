@@ -75,6 +75,8 @@ public class Player : MonoBehaviour
             UpdateShieldVisual();
         }
 
+        _uiManager.UpdateAmmoCount(_currentAmmo);
+
     }
 
     private void UpdateShieldVisual() {
@@ -90,6 +92,7 @@ public class Player : MonoBehaviour
                 break;
 
         }
+
     }
 
     void CalculateMovement() {
@@ -186,6 +189,10 @@ public class Player : MonoBehaviour
     public void ShieldsActive() {
         _shieldsActive = true;
         _shieldVisualizer.SetActive(true);
+    }
+
+    public void RefillAmmo() {
+        _currentAmmo = _ammoCount;
     }
 
     public void AddScore(int score) {
