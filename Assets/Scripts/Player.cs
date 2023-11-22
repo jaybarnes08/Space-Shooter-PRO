@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
         }
 
         _uiManager.UpdateAmmoCount(_currentAmmo);
+        _uiManager.UpdateLives(_lives);
 
     }
 
@@ -157,6 +158,7 @@ public class Player : MonoBehaviour
         } else if (_lives == 1) {
             _rightEngine.SetActive(true);
         }
+ 
 
         if (_lives < 1) {
             _spawnManager.OnPlayerDeath();
@@ -193,6 +195,19 @@ public class Player : MonoBehaviour
 
     public void RefillAmmo() {
         _currentAmmo = _ammoCount;
+    }
+
+    public void AddLives() {
+        _lives++;
+        _lives = Mathf.Clamp(_lives, 0, 3);
+
+        if (_lives == 2) {
+            _rightEngine.SetActive(false);
+        }
+        else if(_lives == 3) {
+            _leftEngine.SetActive(false);
+        }
+
     }
 
     public void AddScore(int score) {
