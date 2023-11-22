@@ -44,6 +44,9 @@ public class Powerup : MonoBehaviour
                     case 4:
                         player.AddLives();
                         break;
+                    case 5:
+                        player.ClusterBombActive();
+                        break;
                     default:
                         Debug.Log("Default Value!");
                         break;

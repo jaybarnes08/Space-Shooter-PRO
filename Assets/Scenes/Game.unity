@@ -528,6 +528,8 @@ MonoBehaviour:
   - {fileID: 5602999548647028862, guid: d48e141b613f9ac4c8d1e9f7f6be5317, type: 3}
   - {fileID: 2312781111717540372, guid: 6b945df4337d1a7438eb488e43117d1a, type: 3}
   - {fileID: 4733873988412204526, guid: 5b43931b82f73eb4ca4ee99e855d52fc, type: 3}
+  _rarePowerup:
+  - {fileID: 222255515796517186, guid: 84ba899a39a2b4a4ea7cf66b46baf670, type: 3}
   _stopSpawning: 0
 --- !u!4 &441119135
 Transform:
@@ -1395,6 +1397,7 @@ MonoBehaviour:
   _laserPrefab: {fileID: 4068437328692185769, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
   _tripleShotPrefab: {fileID: 5711159861616126893, guid: a15671f8716ff4e48838e96028cf9766, type: 3}
   _shieldVisualizer: {fileID: 1544614158}
+  _clusterBombPrefab: {fileID: 6788575199383009615, guid: 22b6fdf37edff134faaec2f85aa84163, type: 3}
   _leftEngine: {fileID: 1494542523}
   _rightEngine: {fileID: 386997151}
   _canFire: -1
@@ -1402,6 +1405,7 @@ MonoBehaviour:
   _tripleShotActive: 0
   _speedBoostActive: 0
   _shieldsActive: 0
+  _clusterBombPowerupActive: 0
   _speedMultiplier: 2
   _shieldStrength: 3
   _score: 0
@@ -2300,6 +2304,10 @@ PrefabInstance:
     - target: {fileID: 4045920005502670344, guid: 842af309ae27bb54da33c148de7facad, type: 3}
       propertyPath: m_Name
       value: Asteroid
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045920005502670344, guid: 842af309ae27bb54da33c148de7facad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4477948222281399072, guid: 842af309ae27bb54da33c148de7facad, type: 3}
       propertyPath: _explosionPrefab

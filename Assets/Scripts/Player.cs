@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private GameObject _tripleShotPrefab;
     [SerializeField] private GameObject _shieldVisualizer;
+    [SerializeField] private GameObject _clusterBombPrefab;
 
     [SerializeField] private GameObject _leftEngine, _rightEngine;
     
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _tripleShotActive = false;
     [SerializeField] private bool _speedBoostActive = false;
     [SerializeField] private bool _shieldsActive = false;
+    [SerializeField] private bool _clusterBombPowerupActive = false;
     [SerializeField] private float _speedMultiplier = 2f;
     [SerializeField] private int _shieldStrength = 3;
 
@@ -128,6 +130,9 @@ public class Player : MonoBehaviour
         {
             Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
         }
+        else if (_clusterBombPowerupActive) {
+            Instantiate(_clusterBombPrefab, transform.position, Quaternion.identity);
+        }
         else {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, _offset, 0), Quaternion.identity);
         }
@@ -188,10 +193,21 @@ public class Player : MonoBehaviour
         _speed /= _speedMultiplier;
     }
 
+    public void ClusterBombActive() {
+        _clusterBombPowerupActive = true;
+        StartCoroutine(ClusterBombPowerDownRoutine());
+    }
+
+    IEnumerator ClusterBombPowerDownRoutine() {
+        yield return new WaitForSeconds(5f);
+        _clusterBombPowerupActive = false;
+    }
+
     public void ShieldsActive() {
         _shieldsActive = true;
         _shieldVisualizer.SetActive(true);
     }
+
 
     public void RefillAmmo() {
         _currentAmmo = _ammoCount;
