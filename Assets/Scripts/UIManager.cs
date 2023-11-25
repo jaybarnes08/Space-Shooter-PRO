@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text _gameOverText;
     [SerializeField] private TMP_Text _restartGameText;
     [SerializeField] private TMP_Text _ammoCountText;
+    [SerializeField] private Slider _thrusterSlider;
 
     private GameManager _gameManager;
 
@@ -47,6 +48,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdateAmmoCount(int ammo) {
         _ammoCountText.text = "Current Ammo: " + ammo;
+    }
+
+    public void UpdateThrusterSlider(float fuelPercentage)
+    {
+        _thrusterSlider.value = fuelPercentage;
     }
 
     void GameOverSequence() {

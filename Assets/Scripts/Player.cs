@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     [SerializeField] private int _ammoCount = 15;
     [SerializeField] private int _currentAmmo;
 
+    [SerializeField] private float _maxFuel = 5f;
+    [SerializeField] private float _currentFuel = 5f;
+    [SerializeField] private bool _thrusterCooldownActive = false;
 
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
@@ -102,8 +105,18 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(KeyCode.LeftShift)) {
-            transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * (_speed * _thrust) * Time.deltaTime);
+        _uiManager.UpdateThrusterSlider(_currentFuel / _maxFuel);
+
+        if (Input.GetKey(KeyCode.LeftShift) && _thrusterCooldownActive == false) {
+            if(_currentFuel > 0)
+            {
+                transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * (_speed * _thrust) * Time.deltaTime);
+                _currentFuel -= 1f * Time.deltaTime;
+            }
+            else
+            {
+                StartCoroutine(ThrusterCooldownRoutine());
+            }
         }
 
         transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * _speed * Time.deltaTime);
@@ -191,6 +204,22 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(5f);
         _speedBoostActive = false;
         _speed /= _speedMultiplier;
+    }
+
+    IEnumerator ThrusterCooldownRoutine()
+    {
+        _thrusterCooldownActive = true;
+        while (_thrusterCooldownActive)
+        {
+            yield return new WaitForSeconds(1f);
+            _currentFuel += 1f;
+
+            if(_currentFuel >= _maxFuel)
+            {
+                _currentFuel = _maxFuel;
+                _thrusterCooldownActive = false;
+            }
+        }
     }
 
     public void ClusterBombActive() {
