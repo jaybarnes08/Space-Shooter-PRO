@@ -209,6 +209,7 @@ public class Player : MonoBehaviour
     IEnumerator ThrusterCooldownRoutine()
     {
         _thrusterCooldownActive = true;
+        _uiManager.EnableRechargeText(true);
         while (_thrusterCooldownActive)
         {
             yield return new WaitForSeconds(1f);

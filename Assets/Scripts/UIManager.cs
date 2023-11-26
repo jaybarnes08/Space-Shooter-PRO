@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text _ammoCountText;
     [SerializeField] private Slider _thrusterSlider;
 
+    [SerializeField] private TMP_Text _thrusterRechargeText;
+
     private GameManager _gameManager;
 
     // Start is called before the first frame update
@@ -53,6 +55,10 @@ public class UIManager : MonoBehaviour
     public void UpdateThrusterSlider(float fuelPercentage)
     {
         _thrusterSlider.value = fuelPercentage;
+    }
+
+    public void EnableRechargeText(bool active) {
+        _thrusterRechargeText.gameObject.SetActive(enabled);
     }
 
     void GameOverSequence() {
