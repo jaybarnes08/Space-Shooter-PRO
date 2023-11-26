@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
 
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
+    
+    private CameraShake _cameraShake;
 
     [SerializeField] AudioClip _laserAudio;
     AudioSource _audioSource;
@@ -48,7 +50,8 @@ public class Player : MonoBehaviour
 
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
-        _audioSource = GetComponent<AudioSource>(); 
+        _audioSource = GetComponent<AudioSource>();
+        _cameraShake = Camera.main.GetComponent<CameraShake>();
 
         if(_spawnManager == null) {
             Debug.LogError("SpawnManager is null!");
@@ -107,16 +110,19 @@ public class Player : MonoBehaviour
 
         _uiManager.UpdateThrusterSlider(_currentFuel / _maxFuel);
 
-        if (Input.GetKey(KeyCode.LeftShift) && _thrusterCooldownActive == false) {
-            if(_currentFuel > 0)
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            if (_thrusterCooldownActive == false)
             {
                 transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * (_speed * _thrust) * Time.deltaTime);
                 _currentFuel -= 1f * Time.deltaTime;
+
+                if(_currentFuel <= 0) {
+                    _currentFuel = 0;
+                    _thrusterCooldownActive = true;
+                    StartCoroutine(ThrusterCooldownRoutine());
+                }
             }
-            else
-            {
-                StartCoroutine(ThrusterCooldownRoutine());
-            }
+            
         }
 
         transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * _speed * Time.deltaTime);
@@ -168,6 +174,7 @@ public class Player : MonoBehaviour
             return;
         }
 
+        _cameraShake.ActivateCameraShake();
         _lives--;
         _uiManager.UpdateLives(_lives);
 
@@ -208,15 +215,11 @@ public class Player : MonoBehaviour
 
     IEnumerator ThrusterCooldownRoutine()
     {
-        _thrusterCooldownActive = true;
-        _uiManager.EnableRechargeText(true);
-        while (_thrusterCooldownActive)
-        {
+        while (_thrusterCooldownActive) {
             yield return new WaitForSeconds(1f);
             _currentFuel += 1f;
 
-            if(_currentFuel >= _maxFuel)
-            {
+            if (_currentFuel >= _maxFuel) {
                 _currentFuel = _maxFuel;
                 _thrusterCooldownActive = false;
             }
