@@ -108,8 +108,6 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        _uiManager.UpdateThrusterSlider(_currentFuel / _maxFuel);
-
         if (Input.GetKey(KeyCode.LeftShift)) {
             if (_thrusterCooldownActive == false)
             {
@@ -135,7 +133,7 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
 
-        
+        _uiManager.UpdateThrusterSlider(_currentFuel / _maxFuel);
     }
 
     void FireLaser() {
@@ -216,8 +214,11 @@ public class Player : MonoBehaviour
     IEnumerator ThrusterCooldownRoutine()
     {
         while (_thrusterCooldownActive) {
-            yield return new WaitForSeconds(1f);
-            _currentFuel += 1f;
+            //yield return new WaitForSeconds(1f);
+            //_currentFuel += 1f;
+            yield return null;
+            _currentFuel += 1f * Time.deltaTime;
+
 
             if (_currentFuel >= _maxFuel) {
                 _currentFuel = _maxFuel;
