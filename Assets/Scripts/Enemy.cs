@@ -13,24 +13,27 @@ public class Enemy : MonoBehaviour
     AudioSource _audioSource;
     float _fireRate = 3f;
     float _canFire = -1;
+    float _changeDirection = 3f;
+    float _changeDirTimer = 3f;
 
     private void Start() {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _anim = GetComponent<Animator>();
-        _audioSource = GetComponent<AudioSource>(); 
+        _audioSource = GetComponent<AudioSource>();
 
         if (_player == null) {
             Debug.LogError("Player is null!");
         }
 
-        if(_anim == null) {
+        if (_anim == null) {
             Debug.LogError("Animator is null!");
         }
+
     }
 
     void Update()
     {
-        CalculateMovement();
+        //CalculateMovement();
 
         if(Time.time > _canFire) {
             _fireRate = Random.Range(3f, 7f);
@@ -47,12 +50,15 @@ public class Enemy : MonoBehaviour
     }
 
     void CalculateMovement() {
-        transform.Translate(Vector3.down * _speed * Time.deltaTime);
+        while (true) {
+            transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
-        if (transform.position.y < -5f) {
-            float randomX = Random.Range(-8f, 8f);
-            transform.position = new Vector3(randomX, 7f, 0);
+            if (transform.position.y < -5f) {
+                float randomX = Random.Range(-8f, 8f);
+                transform.position = new Vector3(randomX, 7f, 0);
+            }
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

@@ -161,5 +161,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830eabeb5c4e2704eb45979f4a6d56e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
+  _speed: 6
   _laserCluster: {fileID: 490363308907702933, guid: 4b5ea66e0f2ebf74b8bee41170df74da, type: 3}

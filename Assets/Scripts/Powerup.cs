@@ -47,6 +47,9 @@ public class Powerup : MonoBehaviour
                     case 5:
                         player.ClusterBombActive();
                         break;
+                    case 6:
+                        player.SlowDownActive();
+                        break;
                     default:
                         Debug.Log("Default Value!");
                         break;

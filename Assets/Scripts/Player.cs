@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _maxFuel = 5f;
     [SerializeField] private float _currentFuel = 5f;
     [SerializeField] private bool _thrusterCooldownActive = false;
+    [SerializeField] private bool _slowed = false;
 
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
@@ -123,7 +124,14 @@ public class Player : MonoBehaviour
             
         }
 
-        transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * _speed * Time.deltaTime);
+        if (_slowed) {
+            transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * (_speed / 2) * Time.deltaTime);
+        } 
+        else {
+            transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * _speed * Time.deltaTime);
+        }
+
+        
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 
@@ -258,6 +266,16 @@ public class Player : MonoBehaviour
             _leftEngine.SetActive(false);
         }
 
+    }
+
+    public void SlowDownActive() {
+        _slowed  = true;
+        StartCoroutine(SlowPowerDownRoutine());
+    }
+
+    IEnumerator SlowPowerDownRoutine() {
+        yield return new WaitForSeconds(5f);
+        _slowed = false;
     }
 
     public void AddScore(int score) {
