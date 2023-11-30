@@ -13,8 +13,8 @@ public class Enemy : MonoBehaviour
     AudioSource _audioSource;
     float _fireRate = 3f;
     float _canFire = -1;
-    float _changeDirection = 3f;
-    float _changeDirTimer = 3f;
+
+    bool _moveLeft = false;
 
     private void Start() {
         _player = GameObject.Find("Player").GetComponent<Player>();
@@ -29,11 +29,13 @@ public class Enemy : MonoBehaviour
             Debug.LogError("Animator is null!");
         }
 
+        StartCoroutine(ZigZagMovementRoutine());
     }
 
     void Update()
     {
         //CalculateMovement();
+        AlternateMovement();
 
         if(Time.time > _canFire) {
             _fireRate = Random.Range(3f, 7f);
@@ -59,6 +61,22 @@ public class Enemy : MonoBehaviour
             }
         }
         
+    }
+
+    void AlternateMovement() {
+        if (_moveLeft) {
+            transform.Translate(new Vector3(-1, -1, 0) *  _speed * Time.deltaTime);
+        }
+        else {
+            transform.Translate(new Vector3(1, -1, 0) * _speed * Time.deltaTime);
+        }
+
+        if (transform.position.y < -5f) {
+            float randomX = Random.Range(-8f, 8f);
+            transform.position = new Vector3(randomX, 7f, 0);
+        }
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -89,5 +107,14 @@ public class Enemy : MonoBehaviour
             Destroy(GetComponent<Collider2D>());
             Destroy(this.gameObject, 2.4f);
         }
+    }
+
+    IEnumerator ZigZagMovementRoutine() {
+        while(true) {
+            yield return new WaitForSeconds(3f);
+            _moveLeft = !_moveLeft;
+            //yield return new WaitForSeconds(3f);
+        }
+        
     }
 }
