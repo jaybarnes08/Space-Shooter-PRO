@@ -6,7 +6,17 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-   [SerializeField] bool _isGameOver = false;
+    [SerializeField] bool _isGameOver = false;
+
+    SpawnManager _spawnManager;
+
+    private void Start() {
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+
+        if(_spawnManager == null) {
+            Debug.LogError("SpawnManager is NULL!");
+        }
+    }
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.R) && _isGameOver == true) {
@@ -21,4 +31,5 @@ public class GameManager : MonoBehaviour
     public void GameOver() {
         _isGameOver = true;
     }
+
 }

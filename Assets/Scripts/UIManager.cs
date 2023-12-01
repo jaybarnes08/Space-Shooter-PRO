@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text _restartGameText;
     [SerializeField] private TMP_Text _ammoCountText;
     [SerializeField] private Slider _thrusterSlider;
+    
+    [SerializeField] private TMP_Text _waveText;
+    [SerializeField] private TMP_Text _NewWaveText;
 
     [SerializeField] private TMP_Text _thrusterRechargeText;
 
@@ -48,6 +51,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateWaveText(int currentWave) {
+        _waveText.text = "Wave: " + currentWave;
+    }
+
     public void UpdateAmmoCount(int ammo) {
         _ammoCountText.text = "Current Ammo: " + ammo;
     }
@@ -67,6 +74,10 @@ public class UIManager : MonoBehaviour
         StartCoroutine(GameOverRoutine());
     }
 
+    public void NewWaveSequence() {
+        StartCoroutine(NewWaveRoutine());
+    }
+
     IEnumerator GameOverRoutine() {
         while (true) {
             _gameOverText.gameObject.SetActive(true);
@@ -76,5 +87,11 @@ public class UIManager : MonoBehaviour
             
         }
         
+    }
+
+    IEnumerator NewWaveRoutine() {
+        _NewWaveText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        _NewWaveText.gameObject.SetActive(false);
     }
 }

@@ -195,6 +195,8 @@ public class Player : MonoBehaviour
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
+
+        _lives = Mathf.Clamp(_lives, 0, 3);
     }
 
     public void TripleShotActive() {
