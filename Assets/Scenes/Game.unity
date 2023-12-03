@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571398, b: 0.30692294, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -657,6 +657,7 @@ MonoBehaviour:
   _enemyPrefabs:
   - {fileID: 6676041629765556842, guid: 152c008824dc21f43b9d419110f43d5f, type: 3}
   - {fileID: 6058503073051747249, guid: 5347c17fa635c412f9828596b7022540, type: 3}
+  - {fileID: 3065297935117937827, guid: a9323a4cc087ae34ab19f03cfa4f311e, type: 3}
   _enemyContainer: {fileID: 638549001}
   _powerup:
   - {fileID: 2378548152389887881, guid: cce8ff39ad3798741bfee824ffa3d2cd, type: 3}

@@ -20,7 +20,7 @@ public class Bomb : MonoBehaviour
     }
 
     IEnumerator BombExplosionRoutine() {
-        yield return new WaitForSeconds(Random.Range(1f, 2f));
+        yield return new WaitForSeconds(1f);
         Instantiate(_laserCluster, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }

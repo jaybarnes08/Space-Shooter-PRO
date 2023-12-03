@@ -14,8 +14,6 @@ public class Enemy : MonoBehaviour
     protected float _fireRate = 3f;
     protected float _canFire = -1;
 
-    
-
     protected virtual void Start() {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _anim = GetComponent<Animator>();
@@ -28,7 +26,6 @@ public class Enemy : MonoBehaviour
         if (_anim == null) {
             Debug.LogError("Animator is null!");
         }
-
         
     }
 
@@ -64,7 +61,7 @@ public class Enemy : MonoBehaviour
 
     
 
-    protected void OnTriggerEnter2D(Collider2D other) {
+    protected virtual void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             Player player = other.transform.GetComponent<Player>();
 
@@ -72,10 +69,7 @@ public class Enemy : MonoBehaviour
                 player.Damage();
             }
 
-            _anim.SetTrigger("OnEnemyDeath");
-            _speed = 0;
-            _audioSource.Play();
-            Destroy(this.gameObject, 2.4f);
+           CalculateEnemyCollision();
 
         }
 
@@ -86,13 +80,16 @@ public class Enemy : MonoBehaviour
                 _player.AddScore(10);
             }
 
-            _anim.SetTrigger("OnEnemyDeath");
-            _speed = 0;
-            _audioSource.Play();
-            Destroy(GetComponent<Collider2D>());
-            Destroy(this.gameObject, 2.4f);
+            CalculateEnemyCollision();
         }
     }
 
-    
+    protected virtual void CalculateEnemyCollision() {
+        _anim.SetTrigger("OnEnemyDeath");
+        _speed = 0;
+        _audioSource.Play();
+        Destroy(this.gameObject, 2.4f);
+    }
+
+
 }
