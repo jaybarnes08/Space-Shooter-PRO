@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float _speed = 4f;
+    [SerializeField] protected float _speed = 4f;
     [SerializeField] GameObject _enemyLaserPrefab;     
     
 
-    Player _player;
-    Animator _anim;
-    AudioSource _audioSource;
-    float _fireRate = 3f;
-    float _canFire = -1;
+    protected Player _player;
+    protected Animator _anim;
+    protected AudioSource _audioSource;
+    protected float _fireRate = 3f;
+    protected float _canFire = -1;
 
-    bool _moveLeft = false;
+    
 
-    private void Start() {
+    protected virtual void Start() {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _anim = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
@@ -29,13 +29,12 @@ public class Enemy : MonoBehaviour
             Debug.LogError("Animator is null!");
         }
 
-        StartCoroutine(ZigZagMovementRoutine());
+        
     }
 
     void Update()
     {
-        //CalculateMovement();
-        AlternateMovement();
+        CalculateMovement();
 
         if(Time.time > _canFire) {
             _fireRate = Random.Range(3f, 7f);
@@ -51,35 +50,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void CalculateMovement() {
-        while (true) {
-            transform.Translate(Vector3.down * _speed * Time.deltaTime);
+    protected virtual void CalculateMovement() {
+        
+        transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
-            if (transform.position.y < -5f) {
-                float randomX = Random.Range(-8f, 8f);
-                transform.position = new Vector3(randomX, 7f, 0);
-            }
+        if (transform.position.y < -5f)
+        {
+            float randomX = Random.Range(-8f, 8f);
+            transform.position = new Vector3(randomX, 7f, 0);
         }
         
     }
 
-    void AlternateMovement() {
-        if (_moveLeft) {
-            transform.Translate(new Vector3(-1, -1, 0) *  _speed * Time.deltaTime);
-        }
-        else {
-            transform.Translate(new Vector3(1, -1, 0) * _speed * Time.deltaTime);
-        }
+    
 
-        if (transform.position.y < -5f) {
-            float randomX = Random.Range(-8f, 8f);
-            transform.position = new Vector3(randomX, 7f, 0);
-        }
-
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
+    protected void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             Player player = other.transform.GetComponent<Player>();
 
@@ -109,12 +94,5 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    IEnumerator ZigZagMovementRoutine() {
-        while(true) {
-            yield return new WaitForSeconds(3f);
-            _moveLeft = !_moveLeft;
-            //yield return new WaitForSeconds(3f);
-        }
-        
-    }
+    
 }

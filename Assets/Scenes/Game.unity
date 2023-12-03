@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571398, b: 0.30692294, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -654,7 +654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6f83f5a2a28d44596bc5bf24a3e66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 6676041629765556842, guid: 152c008824dc21f43b9d419110f43d5f, type: 3}
+  _enemyPrefabs:
+  - {fileID: 6676041629765556842, guid: 152c008824dc21f43b9d419110f43d5f, type: 3}
+  - {fileID: 6058503073051747249, guid: 5347c17fa635c412f9828596b7022540, type: 3}
   _enemyContainer: {fileID: 638549001}
   _powerup:
   - {fileID: 2378548152389887881, guid: cce8ff39ad3798741bfee824ffa3d2cd, type: 3}
@@ -1861,8 +1863,8 @@ MonoBehaviour:
   _score: 0
   _ammoCount: 15
   _currentAmmo: 15
-  _maxFuel: 5
-  _currentFuel: 5
+  _maxFuel: 3
+  _currentFuel: 3
   _thrusterCooldownActive: 0
   _slowed: 0
   _laserAudio: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
