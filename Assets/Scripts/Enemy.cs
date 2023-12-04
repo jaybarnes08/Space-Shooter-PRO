@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
 
     
 
-    protected virtual void OnTriggerEnter2D(Collider2D other) {
+    protected void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             Player player = other.transform.GetComponent<Player>();
 

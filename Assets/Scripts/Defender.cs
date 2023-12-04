@@ -4,6 +4,7 @@ using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Defender : Enemy {
+    
     [SerializeField] GameObject _enemyShield;
     [SerializeField] bool _shieldActive = true;
 
