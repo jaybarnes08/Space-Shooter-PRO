@@ -87,6 +87,7 @@ public class Enemy : MonoBehaviour
     protected virtual void CalculateEnemyCollision() {
         _anim.SetTrigger("OnEnemyDeath");
         _speed = 0;
+        GetComponent<Collider2D>().enabled = false;
         _audioSource.Play();
         Destroy(this.gameObject, 2.4f);
     }
