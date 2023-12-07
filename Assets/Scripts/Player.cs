@@ -293,4 +293,6 @@ public class Player : MonoBehaviour
         return _currentAmmo;
     }
 
+       
+
 }

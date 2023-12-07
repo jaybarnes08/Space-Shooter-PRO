@@ -12,6 +12,15 @@ public class Powerup : MonoBehaviour
     [SerializeField] int _powerupID;
 
     [SerializeField] AudioClip _audioClip;
+    Player _player;
+
+    private void Start() {
+        _player = GameObject.Find("Player").GetComponent<Player>();
+
+        if(_player == null) {
+            Debug.LogError("Player is null!");
+        }
+    }
 
     void Update()
     {
@@ -62,4 +71,5 @@ public class Powerup : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
 }

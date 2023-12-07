@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected float _speed = 4f;
-    [SerializeField] GameObject _enemyLaserPrefab;     
+    [SerializeField] protected GameObject _enemyLaserPrefab;     
     
 
     protected Player _player;
@@ -29,22 +29,26 @@ public class Enemy : MonoBehaviour
         
     }
 
-    void Update()
+    protected virtual void Update()
     {
         CalculateMovement();
-
-        if(Time.time > _canFire) {
+        if (Time.time > _canFire) {
             _fireRate = Random.Range(3f, 7f);
             _canFire = Time.time + _fireRate;
-            GameObject enemylaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
-            Laser[] lasers = enemylaser.GetComponentsInChildren<Laser>();
-            
-            for(int i = 0; i < lasers.Length; i++) {
-                lasers[i].AssignEnemyLaser();
-                
-            }
-           
+            FireLaser();
         }
+
+    }
+
+    protected void FireLaser() {        
+        GameObject enemylaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
+        Laser[] lasers = enemylaser.GetComponentsInChildren<Laser>();
+
+        for (int i = 0; i < lasers.Length; i++) {
+            lasers[i].AssignEnemyLaser();
+
+        }
+
     }
 
     protected virtual void CalculateMovement() {

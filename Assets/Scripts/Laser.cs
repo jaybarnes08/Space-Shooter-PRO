@@ -54,5 +54,13 @@ public class Laser : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+
+        if(collision.CompareTag("Powerup") && _isEnemyLaser) {
+            Powerup powerup = collision.GetComponent<Powerup>();
+            if(powerup != null) {
+                Destroy(powerup.gameObject);
+                Destroy(this.gameObject);
+            }
+        }
     }
 }
