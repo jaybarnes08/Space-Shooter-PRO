@@ -6,9 +6,12 @@ using UnityEngine.UIElements;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] _enemyPrefabs;
+    [SerializeField] GameObject[] _commonEnemyPrefabs;
+    [SerializeField] GameObject[] _uncommonEnemyPrefabs;
     [SerializeField] GameObject _enemyContainer;
-    [SerializeField] GameObject[] _powerup;
+
+    [SerializeField] GameObject[] _commonPowerup;
+    [SerializeField] GameObject[] _unCommonPowerup;
     [SerializeField] GameObject[] _rarePowerup;
     
     [SerializeField] int _wave = 1;
@@ -37,10 +40,24 @@ public class SpawnManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         while (_stopSpawning == false) {
-            int randomEnemyIndex = Random.Range(0, _enemyPrefabs.Length);
+            int randomEnemyRarityIndex = Random.Range(0, 101);
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            GameObject newEnemy = Instantiate(_enemyPrefabs[randomEnemyIndex], posToSpawn, Quaternion.identity);
-            newEnemy.transform.parent = _enemyContainer.transform;
+
+            if(randomEnemyRarityIndex < 76)
+            {
+                int randomEnemyIndex = Random.Range(0, _commonEnemyPrefabs.Length);
+                GameObject newEnemy = Instantiate(_commonEnemyPrefabs[randomEnemyIndex], posToSpawn, Quaternion.identity);
+                newEnemy.transform.parent = _enemyContainer.transform;
+            }
+            else
+            {
+                int randomEnemyIndex = Random.Range(0, _uncommonEnemyPrefabs.Length);
+                GameObject newEnemy = Instantiate(_uncommonEnemyPrefabs[randomEnemyIndex], posToSpawn, Quaternion.identity);
+                newEnemy.transform.parent = _enemyContainer.transform;
+            }
+
+            //GameObject newEnemy = Instantiate(_enemyPrefabs[randomEnemyIndex], posToSpawn, Quaternion.identity);
+            //newEnemy.transform.parent = _enemyContainer.transform;
             _enemiesSpawned++;
 
             if (_enemiesSpawned >= _enemiesPerWave) {
@@ -62,22 +79,30 @@ public class SpawnManager : MonoBehaviour
 
         while (_stopSpawning == false) {
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            int randomPowerup = Random.Range(0, 4);
-            Instantiate(_powerup[randomPowerup], posToSpawn, Quaternion.identity);
+            float rarityIndex = Random.Range(0, 100f);
+
+            if(rarityIndex < 61)
+            {
+                int randomPowerup = Random.Range(0, _commonPowerup.Length);
+                Instantiate(_commonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
+            }
+            else if(rarityIndex < 91)
+            {
+                int randomPowerup = Random.Range(0, _unCommonPowerup.Length);
+                Instantiate(_unCommonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
+
+            }
+            else
+            {
+                int randomPowerup = Random.Range(0, _rarePowerup.Length);
+                Instantiate(_rarePowerup[randomPowerup], posToSpawn, Quaternion.identity);
+            }
+
+            //int randomPowerup = Random.Range(0, 4);
+            //Instantiate(_powerup[randomPowerup], posToSpawn, Quaternion.identity);
             yield return new WaitForSeconds(Random.Range(3f, 7f));
         }
 
-    }
-
-    IEnumerator RarePowerupSpawnRoutine() {
-        yield return new WaitForSeconds(Random.Range(8f, 15f));
-
-        while (_stopSpawning == false) {
-            Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            int randomPowerup = Random.Range(0, 0);
-            Instantiate(_rarePowerup[randomPowerup], posToSpawn, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(8f, 15f));
-        }
     }
 
     public void OnPlayerDeath() {
@@ -87,7 +112,6 @@ public class SpawnManager : MonoBehaviour
     public void StartSpawning() {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
-        StartCoroutine(RarePowerupSpawnRoutine());
     }
 
     public void StopSpawning(bool stop) {

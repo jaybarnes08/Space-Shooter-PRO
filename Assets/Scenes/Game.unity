@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571398, b: 0.30692294, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -654,21 +654,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6f83f5a2a28d44596bc5bf24a3e66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefabs:
+  _commonEnemyPrefabs:
   - {fileID: 6676041629765556842, guid: 152c008824dc21f43b9d419110f43d5f, type: 3}
   - {fileID: 6058503073051747249, guid: 5347c17fa635c412f9828596b7022540, type: 3}
-  - {fileID: 3065297935117937827, guid: a9323a4cc087ae34ab19f03cfa4f311e, type: 3}
+  _uncommonEnemyPrefabs:
   - {fileID: 966715916185694200, guid: 109426af23222e7428dd9b8c4da19cf2, type: 3}
   - {fileID: 4412577418516636457, guid: 377e0688f1e4c0b46a6ce3caa4db9022, type: 3}
+  - {fileID: 3065297935117937827, guid: a9323a4cc087ae34ab19f03cfa4f311e, type: 3}
   _enemyContainer: {fileID: 638549001}
-  _powerup:
-  - {fileID: 2378548152389887881, guid: cce8ff39ad3798741bfee824ffa3d2cd, type: 3}
-  - {fileID: 2988211564196902142, guid: 68f60f96d1441bb41ad42d2821e76df2, type: 3}
-  - {fileID: 5602999548647028862, guid: d48e141b613f9ac4c8d1e9f7f6be5317, type: 3}
+  _commonPowerup:
   - {fileID: 2312781111717540372, guid: 6b945df4337d1a7438eb488e43117d1a, type: 3}
-  - {fileID: 4733873988412204526, guid: 5b43931b82f73eb4ca4ee99e855d52fc, type: 3}
+  _unCommonPowerup:
+  - {fileID: 3490154353878234446, guid: f1577b890068b7847a95b0dc87ea7e86, type: 3}
+  - {fileID: 2988211564196902142, guid: 68f60f96d1441bb41ad42d2821e76df2, type: 3}
+  - {fileID: 2378548152389887881, guid: cce8ff39ad3798741bfee824ffa3d2cd, type: 3}
+  - {fileID: 5602999548647028862, guid: d48e141b613f9ac4c8d1e9f7f6be5317, type: 3}
   _rarePowerup:
   - {fileID: 222255515796517186, guid: 84ba899a39a2b4a4ea7cf66b46baf670, type: 3}
+  - {fileID: 4733873988412204526, guid: 5b43931b82f73eb4ca4ee99e855d52fc, type: 3}
   _wave: 1
   _enemiesPerWave: 0
   _stopSpawning: 0
@@ -3056,7 +3059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4045920005502670344, guid: 842af309ae27bb54da33c148de7facad, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4477948222281399072, guid: 842af309ae27bb54da33c148de7facad, type: 3}
       propertyPath: _explosionPrefab

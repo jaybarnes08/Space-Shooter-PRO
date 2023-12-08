@@ -10,14 +10,20 @@ public class Attacker : Enemy
     // Update is called once per frame
     protected override void CalculateMovement()
     {
-        _distanceToPlayer = Vector2.Distance(transform.position, _player.transform.position);
+        if(_player != null)
+        {
+            _distanceToPlayer = Vector2.Distance(transform.position, _player.transform.position);
 
-        if( _distanceToPlayer < 4.4f) {
-            transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, (_speed * 1.5f) * Time.deltaTime);
+            if (_distanceToPlayer < 4.4f)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, (_speed * 1.5f) * Time.deltaTime);
+            }
+            else
+            {
+                base.CalculateMovement();
+            }
         }
-        else {
-            base.CalculateMovement();
-        }
+        
     }
 
 
