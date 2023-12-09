@@ -1856,6 +1856,7 @@ MonoBehaviour:
   _tripleShotPrefab: {fileID: 5711159861616126893, guid: a15671f8716ff4e48838e96028cf9766, type: 3}
   _shieldVisualizer: {fileID: 1544614158}
   _clusterBombPrefab: {fileID: 6788575199383009615, guid: 22b6fdf37edff134faaec2f85aa84163, type: 3}
+  _homingLaser: {fileID: 5737406041948663576, guid: 3bca5774c24a641c0b0fad6cebe8166a, type: 3}
   _leftEngine: {fileID: 1494542523}
   _rightEngine: {fileID: 386997151}
   _canFire: -1
@@ -1864,6 +1865,7 @@ MonoBehaviour:
   _speedBoostActive: 0
   _shieldsActive: 0
   _clusterBombPowerupActive: 0
+  _homingLaserActive: 1
   _speedMultiplier: 2
   _shieldStrength: 3
   _score: 0

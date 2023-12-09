@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _tripleShotPrefab;
     [SerializeField] private GameObject _shieldVisualizer;
     [SerializeField] private GameObject _clusterBombPrefab;
+    [SerializeField] private GameObject _homingLaser;
 
     [SerializeField] private GameObject _leftEngine, _rightEngine;
     
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _speedBoostActive = false;
     [SerializeField] private bool _shieldsActive = false;
     [SerializeField] private bool _clusterBombPowerupActive = false;
+    [SerializeField] private bool _homingLaserActive = false;
     [SerializeField] private float _speedMultiplier = 2f;
     [SerializeField] private int _shieldStrength = 3;
 
@@ -151,7 +153,11 @@ public class Player : MonoBehaviour
         _currentAmmo--;
         _uiManager.UpdateAmmoCount(_currentAmmo);
 
-        if (_tripleShotActive)
+        if (_homingLaserActive)
+        {
+            Instantiate(_homingLaser, transform.position, Quaternion.identity);
+        }
+        else if (_tripleShotActive)
         {
             Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
         }
