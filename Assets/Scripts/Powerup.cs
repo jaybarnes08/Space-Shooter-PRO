@@ -59,6 +59,9 @@ public class Powerup : MonoBehaviour
                     case 6:
                         player.SlowDownActive();
                         break;
+                    case 7:
+                        player.ActivatHomingLaser();
+                        break;
                     default:
                         Debug.Log("Default Value!");
                         break;

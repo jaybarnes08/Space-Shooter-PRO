@@ -45,6 +45,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laser
       objectReference: {fileID: 0}
+    - target: {fileID: 4068437328692185769, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4678796345819672289, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2666667
@@ -118,6 +122,10 @@ PrefabInstance:
     - target: {fileID: 4068437328692185769, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
       propertyPath: m_Name
       value: Laser (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068437328692185769, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4678796345819672289, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
       propertyPath: m_LocalScale.x

@@ -8,10 +8,11 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] GameObject[] _commonEnemyPrefabs;
     [SerializeField] GameObject[] _uncommonEnemyPrefabs;
+
     [SerializeField] GameObject _enemyContainer;
 
     [SerializeField] GameObject[] _commonPowerup;
-    [SerializeField] GameObject[] _unCommonPowerup;
+    [SerializeField] GameObject[] _uncommonPowerup;
     [SerializeField] GameObject[] _rarePowerup;
     
     [SerializeField] int _wave = 1;
@@ -56,8 +57,7 @@ public class SpawnManager : MonoBehaviour
                 newEnemy.transform.parent = _enemyContainer.transform;
             }
 
-            //GameObject newEnemy = Instantiate(_enemyPrefabs[randomEnemyIndex], posToSpawn, Quaternion.identity);
-            //newEnemy.transform.parent = _enemyContainer.transform;
+
             _enemiesSpawned++;
 
             if (_enemiesSpawned >= _enemiesPerWave) {
@@ -88,8 +88,8 @@ public class SpawnManager : MonoBehaviour
             }
             else if(rarityIndex < 91)
             {
-                int randomPowerup = Random.Range(0, _unCommonPowerup.Length);
-                Instantiate(_unCommonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
+                int randomPowerup = Random.Range(0, _uncommonPowerup.Length);
+                Instantiate(_uncommonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
 
             }
             else
@@ -98,8 +98,6 @@ public class SpawnManager : MonoBehaviour
                 Instantiate(_rarePowerup[randomPowerup], posToSpawn, Quaternion.identity);
             }
 
-            //int randomPowerup = Random.Range(0, 4);
-            //Instantiate(_powerup[randomPowerup], posToSpawn, Quaternion.identity);
             yield return new WaitForSeconds(Random.Range(3f, 7f));
         }
 

@@ -299,6 +299,17 @@ public class Player : MonoBehaviour
         return _currentAmmo;
     }
 
+    public void ActivatHomingLaser()
+    {
+        _homingLaserActive = true;
+        StartCoroutine(HomingLaserPowerDownRoutine());
+    }
+
+    IEnumerator HomingLaserPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5f);
+        _homingLaserActive = false;
+    }
        
 
 }

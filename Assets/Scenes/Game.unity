@@ -664,14 +664,11 @@ MonoBehaviour:
   _enemyContainer: {fileID: 638549001}
   _commonPowerup:
   - {fileID: 2312781111717540372, guid: 6b945df4337d1a7438eb488e43117d1a, type: 3}
-  _unCommonPowerup:
-  - {fileID: 3490154353878234446, guid: f1577b890068b7847a95b0dc87ea7e86, type: 3}
-  - {fileID: 2988211564196902142, guid: 68f60f96d1441bb41ad42d2821e76df2, type: 3}
-  - {fileID: 2378548152389887881, guid: cce8ff39ad3798741bfee824ffa3d2cd, type: 3}
-  - {fileID: 5602999548647028862, guid: d48e141b613f9ac4c8d1e9f7f6be5317, type: 3}
+  _uncommonPowerup: []
   _rarePowerup:
   - {fileID: 222255515796517186, guid: 84ba899a39a2b4a4ea7cf66b46baf670, type: 3}
   - {fileID: 4733873988412204526, guid: 5b43931b82f73eb4ca4ee99e855d52fc, type: 3}
+  - {fileID: 4041352471448183581, guid: 21c0895b16de143f4b10932c174dabd4, type: 3}
   _wave: 1
   _enemiesPerWave: 0
   _stopSpawning: 0
@@ -1865,7 +1862,7 @@ MonoBehaviour:
   _speedBoostActive: 0
   _shieldsActive: 0
   _clusterBombPowerupActive: 0
-  _homingLaserActive: 1
+  _homingLaserActive: 0
   _speedMultiplier: 2
   _shieldStrength: 3
   _score: 0

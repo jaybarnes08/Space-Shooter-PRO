@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1730006768723604858}
   - component: {fileID: 8617875735691300979}
   - component: {fileID: 8170371244914042728}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Attacker
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -292,4 +292,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _enemyLaserPrefab: {fileID: 7114537094456467875, guid: 07f610901e4b7a34bb73cd804c5ad181, type: 3}
-  _ramSpeed: 4
