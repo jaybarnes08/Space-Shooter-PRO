@@ -46,13 +46,13 @@ public class SpawnManager : MonoBehaviour
 
             if(randomEnemyRarityIndex < 76)
             {
-                int randomEnemyIndex = Random.Range(0, _commonEnemyPrefabs.Length);
+                int randomEnemyIndex = Random.Range(0, _commonEnemyPrefabs.Length -1);
                 GameObject newEnemy = Instantiate(_commonEnemyPrefabs[randomEnemyIndex], posToSpawn, Quaternion.identity);
                 newEnemy.transform.parent = _enemyContainer.transform;
             }
             else
             {
-                int randomEnemyIndex = Random.Range(0, _uncommonEnemyPrefabs.Length);
+                int randomEnemyIndex = Random.Range(0, _uncommonEnemyPrefabs.Length -1);
                 GameObject newEnemy = Instantiate(_uncommonEnemyPrefabs[randomEnemyIndex], posToSpawn, Quaternion.identity);
                 newEnemy.transform.parent = _enemyContainer.transform;
             }
@@ -83,18 +83,18 @@ public class SpawnManager : MonoBehaviour
 
             if(rarityIndex < 61)
             {
-                int randomPowerup = Random.Range(0, _commonPowerup.Length);
+                int randomPowerup = Random.Range(0, _commonPowerup.Length -1);
                 Instantiate(_commonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
             }
             else if(rarityIndex < 91)
             {
-                int randomPowerup = Random.Range(0, _uncommonPowerup.Length);
+                int randomPowerup = Random.Range(0, _uncommonPowerup.Length -1);
                 Instantiate(_uncommonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
 
             }
             else
             {
-                int randomPowerup = Random.Range(0, _rarePowerup.Length);
+                int randomPowerup = Random.Range(0, _rarePowerup.Length -1);
                 Instantiate(_rarePowerup[randomPowerup], posToSpawn, Quaternion.identity);
             }
 

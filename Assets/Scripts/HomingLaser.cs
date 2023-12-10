@@ -19,7 +19,6 @@ public class HomingLaser : MonoBehaviour
     void Update()
     {
         _enemies = Physics2D.OverlapCircleAll(transform.position, 20f, LayerMask.GetMask("Enemy"));
-        Debug.Log(_enemies.Length);
 
 
         if (_enemies.Length == 0)

@@ -293,3 +293,4 @@ MonoBehaviour:
   _speed: 3
   _enemyLaserPrefab: {fileID: 7114537094456467875, guid: 07f610901e4b7a34bb73cd804c5ad181, type: 3}
   _canFireAtPowerup: 1
+  _backLaserPrefab: {fileID: 7755734090275368058, guid: 547ca66f3f9d34b7b872bf47ba940ea5, type: 3}
