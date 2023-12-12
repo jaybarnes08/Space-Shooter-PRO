@@ -6,8 +6,21 @@ public class Attacker : Enemy
 {
 
     float _distanceToPlayer;
+    float _dodgeSpeedModifier; 
+    bool _canDodge = true;
 
-    // Update is called once per frame
+    protected override void Start()
+    {
+        base.Start();
+        _dodgeSpeedModifier = Random.Range(-2, 2);
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+  
+        
+    }
     protected override void CalculateMovement()
     {
         if(_player != null)
@@ -21,9 +34,36 @@ public class Attacker : Enemy
             else
             {
                 base.CalculateMovement();
+                DodgePlayerShot();
             }
         }
+
         
+    }
+
+    void DodgePlayerShot()
+    {
+        Collider2D[] lasers = Physics2D.OverlapCircleAll(transform.position, 10f, LayerMask.GetMask("Laser"));
+
+        foreach (var laser in lasers)
+        {
+            float distance = Vector2.Distance(transform.position, laser.transform.position);
+            if (distance <= 10f)
+            {
+                if (_canDodge) {
+                    transform.Translate(Vector3.left * (_speed * _dodgeSpeedModifier) * Time.deltaTime);
+
+                    Debug.Log("Dodging");
+                }
+                
+            }
+        }
+    }
+
+    IEnumerator DodgeCooldownRoutine()
+    {
+        yield return new WaitForSeconds(3f);
+        _canDodge = true;
     }
 
 
