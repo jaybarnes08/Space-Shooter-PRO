@@ -26,9 +26,24 @@ public class Powerup : MonoBehaviour
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
-        if(transform.position.y < -6f) {
+        float distance = Vector2.Distance(transform.position, _player.transform.position);
+
+        if (Input.GetKey(KeyCode.C))
+        {
+            if(distance <= 8f)
+                MoveTowardsPlayer();
+        }
+
+        if (transform.position.y < -6f) {
             Destroy(this.gameObject);
         }
+
+        
+    }
+
+    public void MoveTowardsPlayer()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, _speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

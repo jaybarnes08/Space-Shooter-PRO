@@ -664,7 +664,10 @@ MonoBehaviour:
   _enemyContainer: {fileID: 638549001}
   _commonPowerup:
   - {fileID: 2312781111717540372, guid: 6b945df4337d1a7438eb488e43117d1a, type: 3}
-  _uncommonPowerup: []
+  _uncommonPowerup:
+  - {fileID: 5602999548647028862, guid: d48e141b613f9ac4c8d1e9f7f6be5317, type: 3}
+  - {fileID: 2378548152389887881, guid: cce8ff39ad3798741bfee824ffa3d2cd, type: 3}
+  - {fileID: 2988211564196902142, guid: 68f60f96d1441bb41ad42d2821e76df2, type: 3}
   _rarePowerup:
   - {fileID: 222255515796517186, guid: 84ba899a39a2b4a4ea7cf66b46baf670, type: 3}
   - {fileID: 4733873988412204526, guid: 5b43931b82f73eb4ca4ee99e855d52fc, type: 3}

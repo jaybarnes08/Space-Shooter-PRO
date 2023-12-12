@@ -37,7 +37,6 @@ public class Scholar : Enemy
         //if behind player
         //fire laser up at player
         RaycastHit2D hitinfo = Physics2D.Raycast(transform.position, Vector2.up, 10f, LayerMask.GetMask("Player"));
-        Debug.DrawRay(transform.position, Vector2.up * 10f, Color.red);
 
         if (hitinfo.collider != null)
         {

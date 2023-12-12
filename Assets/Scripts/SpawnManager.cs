@@ -46,13 +46,13 @@ public class SpawnManager : MonoBehaviour
 
             if(randomEnemyRarityIndex < 76)
             {
-                int randomEnemyIndex = Random.Range(0, _commonEnemyPrefabs.Length -1);
+                int randomEnemyIndex = Random.Range(0, _commonEnemyPrefabs.Length);
                 GameObject newEnemy = Instantiate(_commonEnemyPrefabs[randomEnemyIndex], posToSpawn, Quaternion.identity);
                 newEnemy.transform.parent = _enemyContainer.transform;
             }
             else
             {
-                int randomEnemyIndex = Random.Range(0, _uncommonEnemyPrefabs.Length -1);
+                int randomEnemyIndex = Random.Range(0, _uncommonEnemyPrefabs.Length);
                 GameObject newEnemy = Instantiate(_uncommonEnemyPrefabs[randomEnemyIndex], posToSpawn, Quaternion.identity);
                 newEnemy.transform.parent = _enemyContainer.transform;
             }
@@ -80,22 +80,26 @@ public class SpawnManager : MonoBehaviour
         while (_stopSpawning == false) {
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
             float rarityIndex = Random.Range(0, 100f);
+            Debug.Log("Rarity Index: " + rarityIndex);
 
             if(rarityIndex < 61)
             {
-                int randomPowerup = Random.Range(0, _commonPowerup.Length -1);
+                int randomPowerup = Random.Range(0, _commonPowerup.Length - 1);
                 Instantiate(_commonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
+                Debug.Log(randomPowerup);
             }
             else if(rarityIndex < 91)
             {
-                int randomPowerup = Random.Range(0, _uncommonPowerup.Length -1);
+                int randomPowerup = Random.Range(0, _uncommonPowerup.Length - 1);
                 Instantiate(_uncommonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
+                Debug.Log(randomPowerup);
 
             }
             else
             {
-                int randomPowerup = Random.Range(0, _rarePowerup.Length -1);
+                int randomPowerup = Random.Range(0, _rarePowerup.Length - 1);
                 Instantiate(_rarePowerup[randomPowerup], posToSpawn, Quaternion.identity);
+                Debug.Log(randomPowerup);
             }
 
             yield return new WaitForSeconds(Random.Range(3f, 7f));
