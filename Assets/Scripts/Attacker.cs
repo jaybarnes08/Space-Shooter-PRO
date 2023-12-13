@@ -12,7 +12,7 @@ public class Attacker : Enemy
     protected override void Start()
     {
         base.Start();
-        _dodgeSpeedModifier = Random.Range(-2, 2);
+        _dodgeSpeedModifier = Random.Range(-1, 2);
     }
 
     protected override void Update()
@@ -48,13 +48,9 @@ public class Attacker : Enemy
         foreach (var laser in lasers)
         {
             float distance = Vector2.Distance(transform.position, laser.transform.position);
-            if (distance <= 10f)
+            if (distance <= 5f)
             {
-                if (_canDodge) {
-                    transform.Translate(Vector3.left * (_speed * _dodgeSpeedModifier) * Time.deltaTime);
-
-                    Debug.Log("Dodging");
-                }
+                transform.Translate(Vector3.right * (_speed * _dodgeSpeedModifier) * Time.deltaTime);
                 
             }
         }

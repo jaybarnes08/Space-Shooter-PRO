@@ -969,6 +969,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8170371244914042728, guid: 109426af23222e7428dd9b8c4da19cf2, type: 3}
+      propertyPath: _speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170371244914042728, guid: 109426af23222e7428dd9b8c4da19cf2, type: 3}
+      propertyPath: _enemyLaserPrefab
+      value: 
+      objectReference: {fileID: 7114537094456467875, guid: 07f610901e4b7a34bb73cd804c5ad181, type: 3}
+    - target: {fileID: 8170371244914042728, guid: 109426af23222e7428dd9b8c4da19cf2, type: 3}
+      propertyPath: _dodgeSpeedModifier
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3118,7 +3130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4045920005502670344, guid: 842af309ae27bb54da33c148de7facad, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4477948222281399072, guid: 842af309ae27bb54da33c148de7facad, type: 3}
       propertyPath: _explosionPrefab
