@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] GameObject[] _commonEnemyPrefabs;
     [SerializeField] GameObject[] _uncommonEnemyPrefabs;
+    [SerializeField] GameObject _bossPrefab;
 
     [SerializeField] GameObject _enemyContainer;
 
@@ -16,6 +17,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject[] _rarePowerup;
     
     [SerializeField] int _wave = 1;
+    [SerializeField] int _finalWave = 7;
     [SerializeField] int _enemiesPerWave;
     int _enemiesSpawned;
 
@@ -63,14 +65,25 @@ public class SpawnManager : MonoBehaviour
             if (_enemiesSpawned >= _enemiesPerWave) {
                 _stopSpawning = true;
                 _enemiesSpawned = 0;
-                _wave++;
-                _uiManager.UpdateWaveText(_wave);
-                _uiManager.NewWaveSequence();
-                yield return new WaitForSeconds(6.5f);
-                _stopSpawning = false;
+
+                if (_wave <_finalWave)
+                {
+                    _wave++;
+                    _uiManager.UpdateWaveText(_wave);
+                    _uiManager.NewWaveSequence();
+                    yield return new WaitForSeconds(6.5f);
+                    _stopSpawning = false;
+                }
+                else
+                {
+                    
+                }
+                
+
             }
 
             yield return new WaitForSeconds(2.5f);
+
         }
     }
 
@@ -120,4 +133,8 @@ public class SpawnManager : MonoBehaviour
         _stopSpawning = stop;
     }
 
+    void SpawnBoss()
+    {
+        Instantiate(_bossPrefab, new Vector3(0, 9f, 0), Quaternion.identity);
+    }
 }
