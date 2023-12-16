@@ -6,16 +6,20 @@ public class BossEnemy : MonoBehaviour
 {
     [SerializeField] float _speed = 3f;
     [SerializeField] GameObject _enemyLaserPrefab;
+
     [SerializeField] GameObject _laserBeam;
+
     [SerializeField] GameObject _megaShield;
     [SerializeField] int _health = 25;
     [SerializeField] int _shieldHealth = 5;
     bool _shieldActive = true;
+
     int attackIndex;
 
     // Start is called before the first frame update
     void Start()
     {
+        _health = 25;
         attackIndex = 0;
         StartCoroutine(MoveDownScreenRoutine());
         StartCoroutine(FireLaserRoutine());
@@ -130,32 +134,34 @@ public class BossEnemy : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void Damage()
     {
-        if (other.CompareTag("Laser"))
-        { 
-            if (_shieldActive)
+        if (_shieldActive)
+        {
+            _shieldHealth--;
+
+            if(_shieldHealth <= 0)
             {
-                _shieldHealth--;
-
-                if(_shieldHealth == 0)
-                {
-                    _megaShield.gameObject.SetActive(false);
-                    _shieldActive = false;
-                }
-                else
-                {
-                    _shieldHealth--;
-
-                    if(_health <= 0)
-                    {
-                        Destroy(this.gameObject);
-                    }
-                }
+                _megaShield.gameObject.SetActive(false);
+                StartCoroutine(ShieldCooldownRoutine());
+                _shieldActive = false;
             }
-
-            Destroy(other.gameObject);
         }
+        else
+        {
+            _health--;
+
+            if(_health <= 0)
+            {
+                DestroyRoutine();
+            }
+        }
+        
+    }
+
+    void DestroyRoutine()
+    {
+        Destroy(this.gameObject);
     }
 
 }

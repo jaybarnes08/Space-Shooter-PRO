@@ -70,6 +70,7 @@ public class Powerup : MonoBehaviour
                         break;
                     case 5:
                         player.ClusterBombActive();
+                        player.RefillAmmo();
                         break;
                     case 6:
                         player.SlowDownActive();

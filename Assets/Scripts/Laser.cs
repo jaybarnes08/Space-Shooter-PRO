@@ -62,5 +62,18 @@ public class Laser : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+
+        if (collision.CompareTag("Boss")){
+            if (_isEnemyLaser)
+                return;
+
+            BossEnemy boss = collision.GetComponent<BossEnemy>();
+            if(boss != null) { 
+            
+                boss.Damage();
+                Destroy(this.gameObject);
+            }
+
+        }
     }
 }

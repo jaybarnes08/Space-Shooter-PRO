@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _currentFuel = 5f;
     [SerializeField] private bool _thrusterCooldownActive = false;
     [SerializeField] private bool _slowed = false;
+    [SerializeField] private bool _fightingBoss;
 
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
@@ -150,7 +151,9 @@ public class Player : MonoBehaviour
 
         _canFire = Time.time + _fireRate;
 
-        _currentAmmo--;
+        if(!_fightingBoss)
+            _currentAmmo--;
+
         _uiManager.UpdateAmmoCount(_currentAmmo);
 
         if (_homingLaserActive)
@@ -309,6 +312,12 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         _homingLaserActive = false;
+    }
+
+    public void FightingBoss()
+    {
+        _fightingBoss = true;
+        _currentAmmo = _ammoCount;
     }
 
    

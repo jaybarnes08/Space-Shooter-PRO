@@ -22,6 +22,7 @@ public class SpawnManager : MonoBehaviour
     int _enemiesSpawned;
 
     [SerializeField] private bool _stopSpawning = false;
+    bool _bossSpawned = false;
 
     UIManager _uiManager;
 
@@ -36,7 +37,8 @@ public class SpawnManager : MonoBehaviour
     }
 
     private void Update() {
-        _enemiesPerWave = _wave * 5;
+        _enemiesPerWave = _wave * 2;
+        Debug.Log(_enemiesSpawned);
     }
 
     IEnumerator SpawnEnemyRoutine() {
@@ -64,21 +66,21 @@ public class SpawnManager : MonoBehaviour
 
             if (_enemiesSpawned >= _enemiesPerWave) {
                 _stopSpawning = true;
-                _enemiesSpawned = 0;
 
                 if (_wave <_finalWave)
                 {
+                    _enemiesSpawned = 0;
                     _wave++;
                     _uiManager.UpdateWaveText(_wave);
                     _uiManager.NewWaveSequence();
                     yield return new WaitForSeconds(6.5f);
-                    _stopSpawning = false;
+                    
                 }
                 else
                 {
-                    
+                    if (!_bossSpawned)
+                        SpawnBoss();
                 }
-                
 
             }
 
@@ -136,5 +138,12 @@ public class SpawnManager : MonoBehaviour
     void SpawnBoss()
     {
         Instantiate(_bossPrefab, new Vector3(0, 9f, 0), Quaternion.identity);
+        _bossSpawned = true;
+
+        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        if(player != null)
+        {
+            player.FightingBoss();
+        }
     }
 }

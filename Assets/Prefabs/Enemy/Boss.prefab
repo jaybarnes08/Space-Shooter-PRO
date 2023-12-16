@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 601477072242375782}
   m_Layer: 7
   m_Name: Boss
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -418,7 +418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4068437328692185769, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
       propertyPath: m_Name
-      value: Laser
+      value: Laser_Beam
       objectReference: {fileID: 0}
     - target: {fileID: 4068437328692185769, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
       propertyPath: m_IsActive
@@ -476,13 +476,28 @@ PrefabInstance:
     - {fileID: 7160267400283870959, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4068437328692185769, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6571917716027429460}
   m_SourcePrefab: {fileID: 100100000, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
 --- !u!1 &3843332983226748904 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4068437328692185769, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
   m_PrefabInstance: {fileID: 946807938107229505}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6571917716027429460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843332983226748904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac98a2ac0b66242c4bba6f7ee4ca0f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5606366570270747552 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4678796345819672289, guid: de44b43026c2a6540acfed541d68dd26, type: 3}
