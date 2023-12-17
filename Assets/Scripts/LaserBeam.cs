@@ -12,7 +12,7 @@ public class LaserBeam : MonoBehaviour
 
             if(player != null)
             {
-                Destroy(player.gameObject);
+                player.Damage();
             }
         }
     }

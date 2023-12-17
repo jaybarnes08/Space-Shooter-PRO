@@ -402,8 +402,10 @@ MonoBehaviour:
   _enemyLaserPrefab: {fileID: 7114537094456467875, guid: 07f610901e4b7a34bb73cd804c5ad181, type: 3}
   _laserBeam: {fileID: 3843332983226748904}
   _megaShield: {fileID: 1877817955618513716}
-  _health: 25
-  _shieldHealth: 5
+  _currentHealth: 25
+  _maxHealth: 50
+  _currentShieldHealth: 5
+  _maxShieldHealth: 10
 --- !u!1001 &946807938107229505
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite[] _livesSprites;
     [SerializeField] private TMP_Text _gameOverText;
     [SerializeField] private TMP_Text _restartGameText;
+    [SerializeField] private TMP_Text _playAgainText;
+    [SerializeField] private TMP_Text _congratulationsText;
     [SerializeField] private TMP_Text _ammoCountText;
     [SerializeField] private Slider _thrusterSlider;
     
@@ -20,6 +22,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text _NewWaveText;
 
     [SerializeField] private TMP_Text _thrusterRechargeText;
+
+    [SerializeField] GameObject _bossUI;
+    [SerializeField] Slider _bossHealthSlider;
+    [SerializeField] Slider _bossShieldSlider;
 
     private GameManager _gameManager;
 
@@ -75,6 +81,13 @@ public class UIManager : MonoBehaviour
         StartCoroutine(GameOverRoutine());
     }
 
+    public void GameWonSequence()
+    {
+        _playAgainText.gameObject.SetActive(true);
+        _gameManager.GameOver();
+        StartCoroutine(GameWonRoutine());
+    }
+
     public void NewWaveSequence() {
         StartCoroutine(NewWaveRoutine());
     }
@@ -94,5 +107,28 @@ public class UIManager : MonoBehaviour
         _NewWaveText.gameObject.SetActive(true);
         yield return new WaitForSeconds(5f);
         _NewWaveText.gameObject.SetActive(false);
+    }
+
+    public void EnableBossUI()
+    {
+        _bossUI.gameObject.SetActive(true);
+    }
+
+    public void UpdateBossHealth(float health, float shield)
+    {
+        _bossHealthSlider.value = health;
+        _bossShieldSlider.value = shield;
+
+    }
+
+    IEnumerator GameWonRoutine()
+    {
+        while (true)
+        {
+            _congratulationsText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(.5f);
+            _congratulationsText.gameObject.SetActive(false);
+            yield return new WaitForSeconds(.5f);
+        }
     }
 }

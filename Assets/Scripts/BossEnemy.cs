@@ -10,16 +10,44 @@ public class BossEnemy : MonoBehaviour
     [SerializeField] GameObject _laserBeam;
 
     [SerializeField] GameObject _megaShield;
-    [SerializeField] int _health = 25;
-    [SerializeField] int _shieldHealth = 5;
+    [SerializeField] float _currentHealth = 25;
+    [SerializeField] float _maxHealth = 25;
+    [SerializeField] float _currentShieldHealth = 5;
+    [SerializeField] float _maxShieldHealth = 5;
     bool _shieldActive = true;
 
     int attackIndex;
 
+    UIManager _uiManager;
+    Animator _anim;
+    AudioSource _audio;
+
     // Start is called before the first frame update
     void Start()
     {
-        _health = 25;
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _anim = GetComponent<Animator>();
+        _audio = GetComponent<AudioSource>();
+
+        if (_anim == null)
+        {
+            Debug.LogError("Animator is null!");
+        }
+
+        if(_uiManager == null)
+        {
+            Debug.LogError("UIManager is null!");
+        }
+
+        if(_audio == null)
+        {
+            Debug.LogError("AudioSource is null!");
+        }
+
+        _uiManager.EnableBossUI();
+
+        _currentHealth = _maxHealth;
+        _currentShieldHealth = _maxShieldHealth;
         attackIndex = 0;
         StartCoroutine(MoveDownScreenRoutine());
         StartCoroutine(FireLaserRoutine());
@@ -30,7 +58,8 @@ public class BossEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+        _uiManager.UpdateBossHealth(_currentHealth / _maxHealth, _currentShieldHealth / _maxShieldHealth);
+          
     }
 
     IEnumerator MoveDownScreenRoutine()
@@ -43,22 +72,21 @@ public class BossEnemy : MonoBehaviour
 
     }
 
-    void CycleAttackRoutine()
-    {
-        attackIndex = Random.Range(0, 2);
-        Debug.Log(attackIndex);
+    //void CycleAttackRoutine()
+    //{
+    //    attackIndex = Random.Range(0, 2);
 
-        switch (attackIndex)
-        {
-            case 0:
-                StartCoroutine(FireLaserRoutine());
-                break;
-            case 1:
-                StartCoroutine(SideToSideLaserRoutine());
-                break;
-        }
+    //    switch (attackIndex)
+    //    {
+    //        case 0:
+    //            StartCoroutine(FireLaserRoutine());
+    //            break;
+    //        case 1:
+    //            StartCoroutine(SideToSideLaserRoutine());
+    //            break;
+    //    }
 
-    }
+    //}
 
     IEnumerator FireLaserRoutine()
     {
@@ -75,11 +103,12 @@ public class BossEnemy : MonoBehaviour
             }
 
             shotsFired++;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2.3f);
         }
 
-        yield return new WaitForSeconds(3f);
-        CycleAttackRoutine();
+        yield return new WaitForSeconds(2f);
+        //CycleAttackRoutine();
+        StartCoroutine(SideToSideLaserRoutine());
 
     }
 
@@ -94,7 +123,6 @@ public class BossEnemy : MonoBehaviour
 
         while (moving)
         {
-            Debug.Log(moveRight);
             transform.Translate(Vector2.right * _speed * moveRight * Time.deltaTime);
 
             if(transform.position.x >= 8f)
@@ -121,14 +149,15 @@ public class BossEnemy : MonoBehaviour
             
         }
 
-        yield return new WaitForSeconds(3f);
-        CycleAttackRoutine();
+        yield return new WaitForSeconds(2f);
+        //CycleAttackRoutine();
+        StartCoroutine(FireLaserRoutine());
     }
 
     IEnumerator ShieldCooldownRoutine()
     {
         yield return new WaitForSeconds(8f);
-        _shieldHealth += 5;
+        _currentShieldHealth += _maxShieldHealth;
         _megaShield.gameObject.SetActive(true);
         _shieldActive = true;
         
@@ -138,9 +167,9 @@ public class BossEnemy : MonoBehaviour
     {
         if (_shieldActive)
         {
-            _shieldHealth--;
+            _currentShieldHealth--;
 
-            if(_shieldHealth <= 0)
+            if(_currentShieldHealth <= 0)
             {
                 _megaShield.gameObject.SetActive(false);
                 StartCoroutine(ShieldCooldownRoutine());
@@ -149,19 +178,25 @@ public class BossEnemy : MonoBehaviour
         }
         else
         {
-            _health--;
+            _currentHealth--;
 
-            if(_health <= 0)
+            if(_currentHealth <= 0)
             {
                 DestroyRoutine();
             }
         }
+
         
     }
 
     void DestroyRoutine()
     {
-        Destroy(this.gameObject);
+        _anim.SetTrigger("OnEnemyDeath");
+        _speed = 0;
+        GetComponent<Collider2D>().enabled = false;
+        _uiManager.GameWonSequence();
+        _audio.Play();
+        Destroy(this.gameObject, 2.4f);
     }
 
 }

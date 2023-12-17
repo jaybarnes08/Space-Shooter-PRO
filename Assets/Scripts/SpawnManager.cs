@@ -19,12 +19,16 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] int _wave = 1;
     [SerializeField] int _finalWave = 7;
     [SerializeField] int _enemiesPerWave;
+    [SerializeField] int _enemiesKilled;
     int _enemiesSpawned;
 
     [SerializeField] private bool _stopSpawning = false;
     bool _bossSpawned = false;
 
     UIManager _uiManager;
+
+    Coroutine _powerupRoutine;
+    Coroutine _enemyRoutine;
 
     private void Start() {
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
@@ -37,8 +41,8 @@ public class SpawnManager : MonoBehaviour
     }
 
     private void Update() {
-        _enemiesPerWave = _wave * 2;
-        Debug.Log(_enemiesSpawned);
+        _enemiesPerWave = _wave * 5;
+        
     }
 
     IEnumerator SpawnEnemyRoutine() {
@@ -74,6 +78,8 @@ public class SpawnManager : MonoBehaviour
                     _uiManager.UpdateWaveText(_wave);
                     _uiManager.NewWaveSequence();
                     yield return new WaitForSeconds(6.5f);
+                    _stopSpawning = false;
+                    StartCoroutine(SpawnPowerupRoutine());
                     
                 }
                 else
@@ -95,31 +101,37 @@ public class SpawnManager : MonoBehaviour
         while (_stopSpawning == false) {
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
             float rarityIndex = Random.Range(0, 100f);
-            Debug.Log("Rarity Index: " + rarityIndex);
+            
 
             if(rarityIndex < 61)
             {
                 int randomPowerup = Random.Range(0, _commonPowerup.Length - 1);
                 Instantiate(_commonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
-                Debug.Log(randomPowerup);
+    
             }
             else if(rarityIndex < 91)
             {
                 int randomPowerup = Random.Range(0, _uncommonPowerup.Length - 1);
                 Instantiate(_uncommonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
-                Debug.Log(randomPowerup);
+                
 
             }
             else
             {
                 int randomPowerup = Random.Range(0, _rarePowerup.Length - 1);
                 Instantiate(_rarePowerup[randomPowerup], posToSpawn, Quaternion.identity);
-                Debug.Log(randomPowerup);
+                
             }
 
+            
             yield return new WaitForSeconds(Random.Range(3f, 7f));
         }
 
+    }
+
+    public void UpdateEnemiesKilled()
+    {
+        _enemiesKilled++;
     }
 
     public void OnPlayerDeath() {
@@ -127,12 +139,8 @@ public class SpawnManager : MonoBehaviour
     }
 
     public void StartSpawning() {
-        StartCoroutine(SpawnEnemyRoutine());
-        StartCoroutine(SpawnPowerupRoutine());
-    }
-
-    public void StopSpawning(bool stop) {
-        _stopSpawning = stop;
+        _enemyRoutine = StartCoroutine(SpawnEnemyRoutine());
+        _powerupRoutine = StartCoroutine(SpawnPowerupRoutine());
     }
 
     void SpawnBoss()

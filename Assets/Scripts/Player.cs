@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(KeyCode.LeftShift)) {
+        if (Input.GetKey(KeyCode.LeftShift) && !_speedBoostActive) {
             if (_thrusterCooldownActive == false)
             {
                 transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * (_speed * _thrust) * Time.deltaTime);
@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
 
         _canFire = Time.time + _fireRate;
 
-        if(!_fightingBoss)
+        if (!_fightingBoss)
             _currentAmmo--;
 
         _uiManager.UpdateAmmoCount(_currentAmmo);
@@ -191,6 +191,7 @@ public class Player : MonoBehaviour
 
         _cameraShake.ActivateCameraShake();
         _lives--;
+        _lives = Mathf.Clamp(_lives, 0, 3);
         _uiManager.UpdateLives(_lives);
 
         if (_lives == 2) {
@@ -205,7 +206,7 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        _lives = Mathf.Clamp(_lives, 0, 3);
+        
     }
 
     public void TripleShotActive() {
@@ -317,6 +318,13 @@ public class Player : MonoBehaviour
     public void FightingBoss()
     {
         _fightingBoss = true;
+        _tripleShotActive = false;
+        _speedBoostActive = false;
+        _homingLaserActive = false;
+        _shieldsActive = false;
+        _shieldVisualizer.SetActive(false);
+        _slowed = false;
+        _clusterBombPowerupActive = false;
         _currentAmmo = _ammoCount;
     }
 

@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     protected Player _player;
     protected Animator _anim;
     protected AudioSource _audioSource;
+    protected SpawnManager _spawnManager;
     protected float _fireRate = 3f;
     protected float _canFire = -1;
 
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour
         _player = GameObject.Find("Player").GetComponent<Player>();
         _anim = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
 
         if (_player == null) {
             Debug.LogError("Player is null!");
@@ -25,6 +27,11 @@ public class Enemy : MonoBehaviour
 
         if (_anim == null) {
             Debug.LogError("Animator is null!");
+        }
+
+        if(_spawnManager == null)
+        {
+            Debug.LogError("Spawn Manager is null!");
         }
         
     }
