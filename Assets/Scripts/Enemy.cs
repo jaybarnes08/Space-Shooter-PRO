@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     protected float _fireRate = 3f;
     protected float _canFire = -1;
 
+    protected bool _isAlive = true;
+
     protected virtual void Start() {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _anim = GetComponent<Animator>();
@@ -47,14 +49,19 @@ public class Enemy : MonoBehaviour
 
     }
 
-    protected void FireLaser() {        
-        GameObject enemylaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
-        Laser[] lasers = enemylaser.GetComponentsInChildren<Laser>();
+    protected void FireLaser() {
+        if (_isAlive)
+        {
+            GameObject enemylaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
+            Laser[] lasers = enemylaser.GetComponentsInChildren<Laser>();
 
-        for (int i = 0; i < lasers.Length; i++) {
-            lasers[i].AssignEnemyLaser();
+            for (int i = 0; i < lasers.Length; i++)
+            {
+                lasers[i].AssignEnemyLaser();
 
+            }
         }
+        
 
     }
 
@@ -86,16 +93,26 @@ public class Enemy : MonoBehaviour
 
 
         if (other.CompareTag("Laser")) {
-            Destroy(other.gameObject);
-            if(_player != null) {
+            Laser laser = other.transform.GetComponent<Laser>();
+
+            if(laser != null) {
+                if (laser.IsEnemyLaser())
+                    return;  
+            }
+
+            if (_player != null)
+            {
                 _player.AddScore(10);
             }
 
+            Destroy(other.gameObject);
             CalculateEnemyCollision();
+
         }
     }
 
     protected virtual void CalculateEnemyCollision() {
+        _isAlive = false;
         _anim.SetTrigger("OnEnemyDeath");
         _speed = 0;
         GetComponent<Collider2D>().enabled = false;

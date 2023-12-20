@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject _enemyContainer;
 
     [SerializeField] GameObject[] _commonPowerup;
-    [SerializeField] GameObject[] _uncommonPowerup;
+    //[SerializeField] GameObject[] _uncommonPowerup;
     [SerializeField] GameObject[] _rarePowerup;
     
     [SerializeField] int _wave = 1;
@@ -103,25 +103,25 @@ public class SpawnManager : MonoBehaviour
             float rarityIndex = Random.Range(0, 100f);
             
 
-            if(rarityIndex < 61)
+            if(rarityIndex < 71)
             {
                 int randomPowerup = Random.Range(0, _commonPowerup.Length - 1);
                 Instantiate(_commonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
     
-            }
-            else if(rarityIndex < 91)
-            {
-                int randomPowerup = Random.Range(0, _uncommonPowerup.Length - 1);
-                Instantiate(_uncommonPowerup[randomPowerup], posToSpawn, Quaternion.identity);
-                
-
             }
             else
             {
                 int randomPowerup = Random.Range(0, _rarePowerup.Length - 1);
                 Instantiate(_rarePowerup[randomPowerup], posToSpawn, Quaternion.identity);
                 
+
             }
+            //else
+            //{
+            //    int randomPowerup = Random.Range(0, _rarePowerup.Length - 1);
+            //    Instantiate(_rarePowerup[randomPowerup], posToSpawn, Quaternion.identity);
+                
+            //}
 
             
             yield return new WaitForSeconds(Random.Range(3f, 7f));

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8433644710592183891
+--- !u!114 &-4930887167589644670
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,10 +53,10 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: -70
+    value: -25
   tint:
     overrideState: 1
-    value: 25
+    value: 24
   colorFilter:
     overrideState: 1
     value: {r: 1, g: 1, b: 1, a: 1}
@@ -71,16 +71,16 @@ MonoBehaviour:
     value: 0
   postExposure:
     overrideState: 1
-    value: 0
+    value: 0.75
   contrast:
     overrideState: 1
     value: 0
   mixerRedOutRedIn:
     overrideState: 1
-    value: 119
+    value: 100
   mixerRedOutGreenIn:
     overrideState: 1
-    value: 19
+    value: 0
   mixerRedOutBlueIn:
     overrideState: 1
     value: 0
@@ -95,13 +95,13 @@ MonoBehaviour:
     value: 0
   mixerBlueOutRedIn:
     overrideState: 1
-    value: 0
+    value: 23
   mixerBlueOutGreenIn:
     overrideState: 1
-    value: 0
+    value: -39
   mixerBlueOutBlueIn:
     overrideState: 1
-    value: 100
+    value: 151
   lift:
     overrideState: 1
     value: {x: 1, y: 1, z: 1, w: 0}
@@ -1311,7 +1311,7 @@ MonoBehaviour:
       - 0.5
       - 0.5
       - 0.5
---- !u!114 &-5107896636878463984
+--- !u!114 &-4024944267438219324
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1329,13 +1329,13 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 26.94
+    value: 1.4
   threshold:
     overrideState: 1
-    value: 1
+    value: 1.64
   softKnee:
     overrideState: 1
-    value: 0.245
+    value: 0.5
   clamp:
     overrideState: 1
     value: 65472
@@ -1371,5 +1371,5 @@ MonoBehaviour:
   m_Name: Post_Process_Volume Profile
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: -5107896636878463984}
-  - {fileID: -8433644710592183891}
+  - {fileID: -4024944267438219324}
+  - {fileID: -4930887167589644670}
